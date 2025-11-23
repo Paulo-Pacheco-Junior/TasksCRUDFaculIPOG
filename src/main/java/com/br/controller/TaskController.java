@@ -22,34 +22,34 @@ import java.util.Map;
 
 
 
-//http://localhost:8080/ctask/
+//http://localhost:8080/api/tarefas
 
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/ctask/")
+@RequestMapping("/api/tarefas")
 @RestController
 public class TaskController {
 
     @Autowired
     private TaskRepository tRep;
     
-    @GetMapping("/task")
+    @GetMapping
     public List<Task> listar(){
         return this.tRep.findAll();
     }
     
-    @GetMapping("/task/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Task> consultar(@PathVariable Long id){
         Task task = this.tRep.findById(id).orElseThrow(() ->
-            new ResourceNotFoundException("Tarefa nao encontrada: " + id));
+            new ResourceNotFoundException("Tarefa não encontrada: " + id));
         return ResponseEntity.ok(task);
     }
     
-    @PostMapping("/task")
+    @PostMapping
     public Task inserir(@RequestBody Task task) {
         return this.tRep.save(task);
     }
 
-    @PutMapping("/task/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Task> alterar(@PathVariable Long id, @RequestBody Task task){
         Task tsk = this.tRep.findById(id).orElseThrow(() ->
             new ResourceNotFoundException("Tarefa nao encontrada: " + id));
@@ -61,7 +61,7 @@ public class TaskController {
         return ResponseEntity.ok(taskAtualizada);
     }
 
-    @DeleteMapping("/task/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, Boolean>> excluir(@PathVariable Long id){
         Task task = this.tRep.findById(id).orElseThrow(() ->
             new ResourceNotFoundException("Tarefa nao encontrada: " + id));
