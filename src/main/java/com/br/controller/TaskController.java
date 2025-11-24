@@ -25,7 +25,7 @@ import java.util.Map;
 //http://localhost:8080/api/tarefas
 
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/api/tarefas")
+@RequestMapping("/api/v1/tarefas") // Versão 1 da API
 @RestController
 public class TaskController {
 

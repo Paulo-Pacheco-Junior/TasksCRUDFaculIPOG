@@ -9,16 +9,16 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<String> handleNotFound(ResourceNotFoundException ex) {
-        return ResponseEntity.status(404).body(ex.getMessage());
+        return ResponseEntity.status(404).body("Erro: " + ex.getMessage() + ". Verifique o ID informado.");
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<String> handleIllegalArgument(IllegalArgumentException ex) {
-        return ResponseEntity.badRequest().body(ex.getMessage());
+        return ResponseEntity.badRequest().body("Erro: " + ex.getMessage() + ". Corrija os dados enviados.");
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleGeneral(Exception ex) {
-        return ResponseEntity.status(500).body("Erro interno do servidor.");
+        return ResponseEntity.status(500).body("Erro interno. Tente novamente.");
     }
 }
